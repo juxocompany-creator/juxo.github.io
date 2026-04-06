@@ -1,4 +1,51 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Site Title</title>
+    <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+        }
+
+        [data-theme='dark'] {
+            --background-color: black;
+            --text-color: white;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        /* Additional styles... */
+    </style>
+</head>
+<body data-theme="light">
+    <nav>
+        <!-- Your existing navigation content -->
+
+        <button id="theme-toggle">Toggle Dark Mode</button>
+    </nav>
+
+    <!-- Your existing page content -->
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.body.setAttribute('data-theme', currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
