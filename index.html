@@ -27,7 +27,52 @@
       --font-body: 'DM Sans', sans-serif;
       --radius: 14px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --logo-filter: none;
     }
+
+    body.dark {
+      --black: #0d0d0d;
+      --white: #f0f0f0;
+      --accent: #f0f0f0;
+      --accent-light: #cccccc;
+      --accent-glow: rgba(255,255,255,0.12);
+      --gray-dark: #161616;
+      --gray-mid: #1e1e1e;
+      --gray-border: #2e2e2e;
+      --gray-text: #888888;
+      --logo-filter: brightness(0) invert(1);
+    }
+
+    body { transition: background 0.35s, color 0.35s; }
+
+    .dm-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer; background: none; border: 1px solid var(--gray-border);
+      border-radius: 100px; padding: 7px 14px;
+      color: var(--gray-text); font-family: var(--font-body);
+      font-size: 13px; font-weight: 500;
+      transition: var(--transition); white-space: nowrap;
+    }
+    .dm-btn:hover { border-color: var(--accent); color: var(--white); }
+    .dm-track {
+      width: 34px; height: 18px;
+      background: var(--gray-border);
+      border-radius: 999px; position: relative;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+    .dm-track::after {
+      content: '';
+      position: absolute; top: 2px; left: 2px;
+      width: 14px; height: 14px;
+      background: var(--gray-text);
+      border-radius: 50%;
+      transition: transform 0.3s, background 0.3s;
+    }
+    body.dark .dm-track { background: var(--white); }
+    body.dark .dm-track::after { transform: translateX(16px); background: var(--black); }
+
+    .logo img, .footer-brand .logo img { filter: var(--logo-filter); transition: filter 0.35s; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--black); color: var(--white); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
@@ -46,12 +91,13 @@
     .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 8px 32px var(--accent-glow); }
     .btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--gray-border); }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-    .btn-wa { background: #000000; color: #fff; }
-    .btn-wa:hover { background: #333333; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-wa { background: var(--white); color: var(--black); }
+    .btn-wa:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
 
     /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 0; transition: var(--transition); }
     nav.scrolled { background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-border); padding: 14px 0; }
+    body.dark nav.scrolled { background: rgba(13,13,13,0.95); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; }
     .logo { text-decoration: none; display: inline-flex; align-items: center; }
     .logo img { height: 90px; width: auto; }
@@ -123,7 +169,7 @@
     .plan-delivery { font-size: 13px; color: var(--accent-light); margin-bottom: 28px; display: flex; align-items: center; gap: 6px; }
     .plan-divider { height: 1px; background: var(--gray-border); margin-bottom: 24px; }
     .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-    .plan-features li { font-size: 14px; color: #333; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+    .plan-features li { font-size: 14px; color: var(--white); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
     .plan-features li .check { color: var(--accent); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
     .plan-features li.inherited { color: var(--gray-text); }
     .plan-cta { width: 100%; justify-content: center; }
@@ -141,8 +187,8 @@
     .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .testimonial-card { background: var(--gray-mid); border: 1px solid var(--gray-border); border-radius: var(--radius); padding: 32px; transition: border-color 0.3s ease, transform 0.3s ease; }
     .testimonial-card:hover { border-color: rgba(0,0,0,0.3); transform: translateY(-4px); }
-    .stars { color: #000000; font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
-    .testimonial-text { font-size: 15px; color: #333; line-height: 1.7; margin-bottom: 24px; font-style: italic; font-weight: 300; }
+    .stars { color: var(--white); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-text { font-size: 15px; color: var(--white); line-height: 1.7; margin-bottom: 24px; font-style: italic; font-weight: 300; }
     .testimonial-author { display: flex; align-items: center; gap: 12px; }
     .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #000000, #444444); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 15px; flex-shrink: 0; }
     .author-name { font-weight: 600; font-size: 14px; }
@@ -190,6 +236,7 @@
 
     /* MOBILE MENU */
     .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    body.dark .mobile-menu { background: rgba(13,13,13,0.98); }
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); text-decoration: none; transition: color var(--transition); }
     .mobile-menu a:hover { color: var(--accent); }
@@ -236,6 +283,10 @@
         <li><a href="#testimonios">Clientes</a></li>
       </ul>
       <div class="nav-cta">
+        <button class="dm-btn" onclick="toggleDark()" aria-label="Modo oscuro">
+          <span id="dm-icon">🌙</span>
+          <div class="dm-track"></div>
+        </button>
         <a href="https://wa.me/34668546614?text=Hola%2C%20quiero%20información%20sobre%20una%20web" target="_blank" class="btn btn-ghost" style="padding:10px 20px;font-size:14px;">WhatsApp</a>
         <a href="#servicios" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">Ver planes →</a>
       </div>
@@ -535,7 +586,7 @@
           <h4>Contacto</h4>
           <ul class="footer-links">
             <li><a href="https://wa.me/34668546614" target="_blank">💬 WhatsApp</a></li>
-            <li><a href="mailto:juxocompany@gmail.com">✉️ juxocompany@gmail.com</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#2b415e53444844465b4a45526b4c464a424705484446">✉️ <span class="__cf_email__" data-cfemail="7e140b06111d11130e1f10073e19131f1712501d1113">[email&#160;protected]</span></a></li>
             <li><a href="#">📍 España</a></li>
           </ul>
         </div>
@@ -550,7 +601,21 @@
   <!-- FLOATING WA -->
   <a href="https://wa.me/34668546614?text=Hola%2C%20quiero%20información%20sobre%20una%20web" target="_blank" class="wa-float" aria-label="WhatsApp">💬</a>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // DARK MODE
+    function toggleDark() {
+      const isDark = document.body.classList.toggle('dark');
+      localStorage.setItem('juxo-dark', isDark ? '1' : '');
+      document.getElementById('dm-icon').textContent = isDark ? '☀️' : '🌙';
+    }
+    if (localStorage.getItem('juxo-dark')) {
+      document.body.classList.add('dark');
+      document.addEventListener('DOMContentLoaded', () => {
+        const icon = document.getElementById('dm-icon');
+        if (icon) icon.textContent = '☀️';
+      });
+    }
+
     // NAV SCROLL
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -589,9 +654,10 @@
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', e => {
         const href = link.getAttribute('href');
-        if (!href || href === '#') return;
+        if (href === '#') return;
+        e.preventDefault();
         const target = document.querySelector(href);
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
     });
   </script>
